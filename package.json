@@ -1,14 +1,9 @@
 {
-  "name": "cclone",
-  "version": "1.0.0",
-  "description": "",
+  "name": "@nvjrsgu/cclone",
+  "version": "0.0.1",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Vitalij Nykyforenko <vitalij.nykyforenko@gmail.com>",
+  "license": "MIT",
   "bin": {
     "cclone": "bin/cli.js"
   },
