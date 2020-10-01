@@ -1,33 +1,24 @@
-const fs = require('fs');
+const fs = require('fs-extra')
 const moment = require('moment');
+const path = require('path');
+
+const regExpRule = /(?<={{)(.*?)(?=}})/;
+const regExpSplit = /[\/\\]/;
 
 function ccopy(from, to, callback) {
-  const splittedTo = to.split(/[\/\\]/);
-  const fileName = splittedTo.pop();
-  let isStarted = false;
-  let pattern = '';
-  let toRepl = '';
-  let tempName = fileName.split('').reduce((acc, cur) => {
-    if (cur !== '`') {
-      if (isStarted) {
-        acc += '^';
-        pattern += cur;
-        toRepl += '^';
-      } else {
-        acc += cur
-      }
-    } else {
-      isStarted = !isStarted;
-    }
+  const now = moment();
 
-    return acc;
-  }, '');
+  const pathArr = to.split(regExpSplit);
+  let fileName = pathArr.pop();
+  const datesList = fileName.match(regExpRule);
 
-  const date = moment().format(pattern);
-  tempName = tempName.replace(toRepl, date);
+  datesList.forEach((cur) => {
+    fileName = fileName.replace(`{{${cur}}}`, now.format(cur));
+  });
 
-  const toWithDAte = splittedTo.join('/') + '/' + tempName;
-  fs.copyFile(from, toWithDAte, callback);
+  const formattedPath = path.join(...pathArr, fileName);
+
+  fs.copy(from, formattedPath).then(callback);
 }
 
 module.exports = ccopy;

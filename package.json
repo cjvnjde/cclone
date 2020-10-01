@@ -1,6 +1,6 @@
 {
   "name": "@nvjrsgu/cclone",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "main": "index.js",
   "author": "Vitalij Nykyforenko <vitalij.nykyforenko@gmail.com>",
   "license": "MIT",
@@ -8,6 +8,7 @@
     "cclone": "bin/cli.js"
   },
   "dependencies": {
-    "moment": "^2.29.0"
+    "fs-extra": "9.0.1",
+    "moment": "2.29.0"
   }
 }
